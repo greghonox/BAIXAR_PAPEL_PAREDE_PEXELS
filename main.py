@@ -48,8 +48,8 @@ class BaixarPexels:
         self.dr.close()
         print(f'FINALIZANDO SCRIPT')
 
-def criar_pasta(pst):
-    try: makedirs(pst)
+def criar_pasta():
+    try: makedirs(getcwd() + BRR + 'imgs')
     except: pass
     
 BaixarPexels(getcwd()+ BRR +'imgs')    
