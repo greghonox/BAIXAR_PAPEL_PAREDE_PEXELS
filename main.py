@@ -12,13 +12,13 @@ from platform import platform
 from requests import get
 from time import sleep
 
-BRR = '/' if 'windows' not in platform() else '\\'
+BRR = '/' if 'windows' in platform() else '\\'
 
 class BaixarPexels:
     def __init__(self, caminho_papel_parede) -> None:
         URL = 'https://www.pexels.com/pt-br/procurar/4k%20paisagem%20wallpapers/'
         self.caminho_papel_parede = caminho_papel_parede
-        self.dr = webdriver.Chrome()
+        self.dr = webdriver.Firefox(executable_path=r'C:\Users\Sandro Bispo\Desktop\BAIXAR_PAPEL_PAREDE_PEXELS-main\geckodriver.exe')
         self.dr.get(URL)
         self.pegar_img()
         
@@ -36,6 +36,10 @@ class BaixarPexels:
                 except Exception as e: pass
             self.dr.find_element_by_tag_name('body').send_keys(Keys.END)
             sleep(5)
+
+    # def criar_pasta():
+    #     try: makedirs(getcwd() + '/' + 'imgs')
+    # except: pass
     
     def baixar_img(self, url, name):
         try: 
@@ -46,10 +50,4 @@ class BaixarPexels:
     def __del__(self):
         self.dr.quit()
         self.dr.close()
-        print(f'FINALIZANDO SCRIPT')
-
-def criar_pasta():
-    try: makedirs(getcwd() + BRR + 'imgs')
-    except: pass
-    
-BaixarPexels(getcwd()+ BRR +'imgs')    
+        print(f'FINALIZANDO SCRIPT') 
