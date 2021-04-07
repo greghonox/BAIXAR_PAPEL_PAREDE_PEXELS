@@ -12,13 +12,13 @@ from platform import platform
 from requests import get
 from time import sleep
 
-BRR = '/' if 'windows' not in platform() else '\\'
+BRR = '/' if 'windows' not in platform() else r'\'
 
 class BaixarPexels:
     def __init__(self, caminho_papel_parede) -> None:
         URL = 'https://www.pexels.com/pt-br/procurar/4k%20paisagem%20wallpapers/'
         self.caminho_papel_parede = caminho_papel_parede
-        self.dr = webdriver.Chrome()
+        self.dr = webdriver.Chrome(executable_path=getcwd() + BRR + 'chromedriver.exe')
         self.dr.get(URL)
         self.pegar_img()
         
@@ -51,5 +51,6 @@ class BaixarPexels:
 def criar_pasta():
     try: makedirs(getcwd() + BRR + 'imgs')
     except: pass
-    
+
+criar_pasta()    
 BaixarPexels(getcwd()+ BRR +'imgs')    
